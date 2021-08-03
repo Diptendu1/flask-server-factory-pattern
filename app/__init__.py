@@ -2,8 +2,8 @@ import logging
 from flask import Flask, request
 from datetime import datetime as dt
 from flask_cors import CORS
-
-from environs import Env, EnvError
+from settings import config
+from models.core import db
 
 from app.app_extentions import logs
 from views.app_routes import routes
@@ -11,19 +11,17 @@ from views.app_routes import routes
 
 class Config:
 
-    env = Env()
-    env.read_env()
-
-    # Logging Setup
-    LOG_TYPE = env.str("LOG_TYPE", "stream")  # Default is a Stream handler
-    LOG_LEVEL = env.str("LOG_LEVEL", "INFO")
-
-    # File Logging Setup
-    LOG_DIR = env.str("LOG_DIR", "/data/logs")
-    APP_LOG_NAME = env.str("APP_LOG_NAME", "app.log")
-    WWW_LOG_NAME = env.str("WWW_LOG_NAME", "www.log")
-    LOG_MAX_BYTES = env.int("LOG_MAX_BYTES", 100_000_000)  # 100MB in bytes
-    LOG_COPIES = env.int("LOG_COPIES", 5)
+    LOG_TYPE = config.get("LOG_TYPE")
+    LOG_LEVEL = config.get("LOG_LEVEL")
+    LOG_DIR = config.get("LOG_DIR")
+    APP_LOG_NAME = config.get("APP_LOG_NAME")
+    WWW_LOG_NAME = config.get("WWW_LOG_NAME")
+    LOG_MAX_BYTES = config.get("LOG_MAX_BYTES")
+    LOG_COPIES = config.get("LOG_COPIES")
+    # Database
+    SQLALCHEMY_DATABASE_URI = config.get("SQLALCHEMY_DATABASE_URI")
+    SQLALCHEMY_ECHO = False
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 
 def create_app():
@@ -56,6 +54,7 @@ def create_app():
         )
         return response
 
+    db.init_app(app)
     app.register_blueprint(routes)
     logs.init_app(app)
     return app
