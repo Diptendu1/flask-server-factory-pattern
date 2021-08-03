@@ -1,5 +1,4 @@
 from . import routes
-from flask import request
 from controllers import main_controller
 
 
