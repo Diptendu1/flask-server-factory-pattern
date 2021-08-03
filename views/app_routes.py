@@ -4,7 +4,7 @@ from controllers import main_controller
 
 @routes.route("/")
 def index():
-    return "BAse API"
+    return "Base API"
 
 
 @routes.route("/api/v1/first")
