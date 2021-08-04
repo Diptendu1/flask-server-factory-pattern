@@ -15,3 +15,7 @@ def first():
 @routes.route("/api/v1/geturlres", methods=['GET'])
 async def get_url_res():
     return main_controller.get_json("https://api.publicapis.org/entries")
+
+@routes.route("/ai/v1/addrole", methods=["POST"])
+def add_role():
+    return main_controller.insert_data_ex()
