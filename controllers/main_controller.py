@@ -24,7 +24,7 @@ def insert_data_ex():
     role = Role(name="role2", description="Role description")
     db.session.add(role)
     db.session.commit()
-    return_map = {"message": "added data nto roles"}
+    return_map = {"message": "added data to roles"}
     return return_map
 
 

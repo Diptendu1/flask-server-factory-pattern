@@ -4,6 +4,7 @@ from datetime import datetime as dt
 from flask_cors import CORS
 from settings import config
 from models.core import db
+from flask_migrate import Migrate
 
 from app.app_extentions import logs
 from views.app_routes import routes
@@ -57,4 +58,5 @@ def create_app():
     db.init_app(app)
     app.register_blueprint(routes)
     logs.init_app(app)
+    migrate = Migrate(app, db)
     return app

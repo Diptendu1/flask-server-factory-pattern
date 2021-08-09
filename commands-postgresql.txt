@@ -1,0 +1,1 @@
+pg_ctl -D "C:\Users\dipte\Documents\softwares\postgres\postgresql-13.3-2-windows-x64-binaries\pgsql\data" -l "C:\Users\dipte\Documents\softwares\postgres\postgresql-13.3-2-windows-x64-binaries\pgsql\log\pgsql.log" restart
