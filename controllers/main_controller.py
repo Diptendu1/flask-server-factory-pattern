@@ -21,7 +21,7 @@ async def get_json(url):
 
 
 def insert_data_ex():
-    role = Role(name="role2", description="Role description")
+    role = Role(name="role4", description="Role description")
     db.session.add(role)
     db.session.commit()
     return_map = {"message": "sss data to roles"}
