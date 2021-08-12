@@ -4,6 +4,7 @@ from sqlalchemy import func
 
 class IdqUser(db.Model):
 
+
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     created_on = db.Column(db.DateTime(), default=func.now())
     name = db.Column(db.String(100))
