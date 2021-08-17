@@ -10,18 +10,17 @@ from models.model import IdqRole
 
 logger = logging.getLogger("app.access")
 
-class controller_object:
+
+class ControllerObject:
 
     def first(self):
         logger.info("HERE")
         return "first API"
 
-
-    async def get_json(self,url):
+    async def get_json(self, url):
         async with requests.get(url) as response:
             assert response.status == 200
             return await response.json()
-
 
     def insert_data_ex(self):
         role = IdqRole(name="role2", description="Role description")
@@ -61,12 +60,11 @@ class controller_object:
         return_map = {}
         return_list = []
         for user_role in user_roles:
-            #print(user_role.to_dict(show=['id','users', 'roles']))
+            # print(user_role.to_dict(show=['id','users', 'roles']))
             return_list.append(user_role.self_serialize())
 
         return_map['result'] = return_list
         return return_map
-
 
     def add_user_role(self):
         request_data = request.get_json()
@@ -78,7 +76,6 @@ class controller_object:
         db.session.add(user_role_obj)
         db.session.commit()
         return "true"
-
 
     def get_user_details_by_id(self):
         user_id = request.args.get('user_id')
