@@ -83,3 +83,18 @@ class ControllerObject:
         return_map = {}
         return_map["user_details"] = user_details.self_serialize()
         return return_map
+
+    @classmethod
+    def change_username(cls):
+        request_data = request.get_json()
+        user_id = request_data['user_id']
+        username = request_data['username']
+        user = IdqUser.query.get(user_id)
+        user_obj = user.self_serialize()
+        old_name = user_obj['name']
+        user.name = username
+        db.session.add(user)
+        db.session.commit()
+        return_map = {}
+        return_map['output'] = 'Successful'
+        return return_map

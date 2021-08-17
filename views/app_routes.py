@@ -1,5 +1,6 @@
 from . import routes
 from controllers import main_controller
+from controllers import controller_object_oriented
 
 
 @routes.route("/", methods=['GET'])
@@ -40,5 +41,10 @@ def get_users():
 @routes.route("/api/v1/getuser", methods=["GET"])
 def get_user():
     return main_controller.get_user_details_by_id()
+
+
+@routes.route("/api/v1/change_username", methods=["PUT"])
+def change_username():
+    return controller_object_oriented.ControllerObject.change_username()
 
 
