@@ -35,3 +35,10 @@ def add_user_role():
 @routes.route("/api/v1/getusers", methods=["GET"])
 def get_users():
     return main_controller.get_all_users()
+
+
+@routes.route("/api/v1/getuser", methods=["GET"])
+def get_user():
+    return main_controller.get_user_details_by_id()
+
+

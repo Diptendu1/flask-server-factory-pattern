@@ -2,7 +2,7 @@ import requests
 import logging
 import json
 from sqlalchemy.orm import sessionmaker
-from flask import jsonify
+from flask import jsonify, request
 from app import db
 from models.model import IdqUser
 from models.model import IdqUserRole
@@ -68,9 +68,20 @@ def get_all_users():
 
 
 def add_user_role():
-    user = IdqUser.query.get(3)
-    role = IdqRole.query.get(3)
+    request_data = request.get_json()
+    user_id = request_data['user_id']
+    role_id = request_data['role_id']
+    user = IdqUser.query.get(user_id)
+    role = IdqRole.query.get(role_id)
     user_role_obj = IdqUserRole(roles=role, users=user)
     db.session.add(user_role_obj)
     db.session.commit()
     return "true"
+
+
+def get_user_details_by_id():
+    user_id = request.args.get('user_id')
+    user_details = IdqUser.query.get(int(user_id))
+    return_map = {}
+    return_map["user_details"] = user_details.self_serialize()
+    return return_map
