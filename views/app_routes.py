@@ -47,4 +47,8 @@ def get_user():
 def change_username():
     return controller_object_oriented.ControllerObject.change_username()
 
+@routes.route("/api/v1/delete_user", methods=["DELETE"])
+def delete_user():
+    return controller_object_oriented.ControllerObject.delete_user()
+
 

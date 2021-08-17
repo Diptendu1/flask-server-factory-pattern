@@ -98,3 +98,14 @@ class ControllerObject:
         return_map = {}
         return_map['output'] = 'Successful'
         return return_map
+
+    @classmethod
+    def delete_user(cls):
+        request_data = request.get_json()
+        user_id = request_data['user_id']
+        user = IdqUser.query.get(user_id)
+        db.session.delete(user)
+        db.session.commit()
+        return_map = {}
+        return_map['result'] = 'Completed'
+        return return_map
