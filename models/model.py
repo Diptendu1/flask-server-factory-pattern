@@ -1,8 +1,9 @@
 from .core import db
 from sqlalchemy import func
+from flask_login import UserMixin
 
 
-class IdqUser(db.Model):
+class IdqUser(UserMixin, db.Model):
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     created_on = db.Column(db.DateTime(), default=func.now())
