@@ -1,0 +1,17 @@
+FROM centos:latest
+WORKDIR /etc/yum.repos.d/
+RUN sed -i 's/mirrorlist/#mirrorlist/g' /etc/yum.repos.d/CentOS-*
+RUN sed -i 's|#baseurl=http://mirror.centos.org|baseurl=http://vault.centos.org|g' /etc/yum.repos.d/CentOS-*
+RUN yum update -y
+WORKDIR /root
+RUN yum install python3.8 -y
+RUN yum install -y python3-pip
+RUN python3.8 --version
+RUN pip3.8 --version
+WORKDIR /root
+#RUN python3.8 -m venv pyenv
+#RUN source /root/pyenv/bin/activate
+RUN mkdir app
+COPY ./requirements.txt /root/app/requirements.txt
+WORKDIR /root/app
+RUN pip3.8 install -r requirements.txt
